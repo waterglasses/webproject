@@ -1,0 +1,49 @@
+form#form-task.form-inline(class='todos')
+  .form
+    .main
+      input(type='text', id='content', name='content', placeholder='호스팅 제목')
+      input(type='text', id='city', name='city', placeholder='도시')
+      input(type='text', id='address', name='address', placeholder='주소')
+      input(type='text', id='charge', name='charge', placeholder='요금')
+      input(type='text', id='facilities', name='facilities', placeholder='편의시설')
+      input(type='text', id='rule', name='rule', placeholder='이용규칙')
+    .sub
+      .form-group
+        select.form-control(name='category')
+          option(value='1인', selected) 1인
+          option(value='2인') 2인
+          option(value='3인') 3인
+          option(value='4인 이상') 4인 이상
+      .form-group
+        select.form-control(name='priority')
+          option(value='3') 큼
+          option(value='2', selected) 보통
+          option(value='1') 작음
+
+  .actions
+      button#post-task.btn.btn-primary.btn-lg.btn-block(type='button') 저장
+
+ul.tasks 
+
+.no-task 
+  .alert.alert-info Task가 없습니다.
+script#task-template(type='text/template').
+  <li class='task <%= doneStr %>' data-id='<%= id %>'>
+    <span class='check'>
+      <i class='fa fa-check fa-lg'></i>
+    </span>
+    <span class='content'><%=content %></span>
+    <% if (category) { %>
+      <span class='label label-default category'> 
+        <%= category %>
+      </span>
+    <% } %>
+    <span class='priority p<%= priority %>'>
+      <%= (priority === 3) ? "중요" : ((priority === 1) ? "사소": "보통") %>
+    </span>
+    <a href='#' class='remove'><i class='fa fa-trash-o'></i></a>
+  </li>
+script.
+  $(function() {
+    var todo = new TaskController();    //todo.js
+  });

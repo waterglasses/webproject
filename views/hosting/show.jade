@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header= post.title
+    p
+      b by #{host.email}
+      | 
+      span at #{moment(host.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
+      | 
+      | (조회수 #{host.read})
+    p.well(style='white-space:pre;')= host.content
+    
+    a.btn.btn-default(href='/hosting') 목록
